@@ -1,0 +1,9 @@
+<h1 class="text-center">Welcome To the dashboard</h1>
+<div *ngIf="data">
+    <div *ngFor="let joke of data.data">
+        <app-joke [joke]="joke" (jokeDeleted)="JokeDeleted($event)" ></app-joke>
+    </div>
+    <br>
+    <button class="btn btn-success btn-lg" [disabled]="!data.prev_page_url" (click)="getPrevJokes()">Previous Page</button>
+    <button class="btn btn-info pull-right btn-lg" [disabled]="!data.next_page_url" (click)="getNextJokes()">Next Page</button>
+    </div>

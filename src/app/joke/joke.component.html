@@ -1,0 +1,32 @@
+<div class="panel panel-default" *ngIf="joke">
+  <div class="panel-heading">
+    <span *ngIf="!editing">{{joke.title}}</span>
+    <span *ngIf="editing">
+
+      <input type="text" class="form-control" [formControl]="title">
+    </span>
+    <span class="pull-right" *ngIf="!editing">
+<a [routerLink]="['/user/profile',joke.user.id]">{{joke.user.name}}</a>
+    </span>
+  </div>
+  <div class="panel-body" *ngIf="!editing">
+    {{joke.joke}}
+  </div>
+  <div class="panel-body" *ngIf="editing">
+    <textarea rows="10" class="form-control" [formControl]="content"></textarea>
+  </div>
+  
+  <div class="panel-footer">
+    {{joke.created_at |preetyDate }}
+    <span *ngIf="canModify() && !editing">
+      <button class="btn btn-primary btn-xs pull-right" (click)="edit()">Edit</button>
+      <button class="btn btn-success btn-xs pull-right"(click)="delete()">Delete</button>
+    </span>
+    <span *ngIf="editing">
+        <button class="btn btn-primary btn-xs pull-right" (click)="cancel()" [disabled]="title.invalid || content.invalid">Cancel Changes</button>
+      <button class="btn btn-primary btn-xs pull-right" (click)="updateJoke()" [disabled]="title.invalid || content.invalid">Save Changes</button>
+      <!-- <button class="btn btn-success btn-xs pull-right">Delete</button> -->
+    </span>
+    
+  </div>
+  </div>

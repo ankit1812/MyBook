@@ -1,0 +1,37 @@
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="/">
+          Site title
+        </a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a  *ngIf="isLoggedin()"routerLink ="create/joke">Create joke</a></li>
+          <li><a routerLink ="/dashboard" *ngIf="isLoggedin()">Dashboard</a></li>
+          <li *ngIf="isLoggedin() && user" [routerLink]="['user/profile' , user.id]"><a role="button">My Profile</a> </li>
+        </ul>
+  
+        <ul class="nav navbar-nav navbar-right">
+          <li><a *ngIf="!isLoggedin()" [routerLink]="'auth/login'"  >Login</a> </li>
+          <li><a *ngIf="!isLoggedin()" [routerLink]='"auth/register"'>Register</a> </li>
+          <li><a *ngIf="isLoggedin()" (click)="logOut()">Logout</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="container">
+    <app-notify></app-notify>
+   <router-outlet></router-outlet>
+
+  </div>
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
